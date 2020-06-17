@@ -1,0 +1,49 @@
+/// generating primary key 
+CREATE TABLE article_categories (
+	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	name varchar(255)
+);
+
+INSERT INTO article_categories(name) VAlUES ('science'), ('literature');
+
+//example of order in the shop
+CREATE TABLE users (
+  id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  email varchar(255),
+  first_name varchar(255)
+);
+
+CREATE TABLE orders (
+	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	user_id bigint REFERENCES users(id),
+	created_at timestamp
+);
+
+CREATE TABLE goods (
+	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	name    varchar(255),
+	price int
+);
+
+CREATE TABLE order_items (
+	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	order_id  bigint REFERENCES orders(id),
+	good_id bigint REFERENCES  goods(id),
+	price int
+);
+
+// constraits
+CREATE TABLE users (
+	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	username varchar(255) NOT NULL,
+	email text NOT NULL,
+	created_at timestamp NOT NULL,
+	UNIQUE(username)
+);
+
+CREATE TABLE topics (
+	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	user_id  bigint REFERENCES users(id),
+	body text NOT NULL,
+	created_at timestamp NOT NULL
+);
