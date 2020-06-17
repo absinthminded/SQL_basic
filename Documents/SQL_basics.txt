@@ -1,4 +1,4 @@
-/// generating primary key 
+-- generating primary key 
 CREATE TABLE article_categories (
 	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	name varchar(255)
@@ -6,7 +6,7 @@ CREATE TABLE article_categories (
 
 INSERT INTO article_categories(name) VAlUES ('science'), ('literature');
 
-//example of order in the shop
+--example of order in the shop
 CREATE TABLE users (
   id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   email varchar(255),
@@ -32,7 +32,7 @@ CREATE TABLE order_items (
 	price int
 );
 
-// constraits
+-- constraits
 CREATE TABLE users (
 	id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	username varchar(255) NOT NULL,
@@ -47,3 +47,22 @@ CREATE TABLE topics (
 	body text NOT NULL,
 	created_at timestamp NOT NULL
 );
+
+-- editing table structure
+
+ALTER TABLE users ADD CONSTRAINT email UNIQUE(email);
+
+ALTER TABLE users	
+	DROP COLUMN age;
+
+ALTER TABLE users 
+	RENAME COLUMN name TO first_name;
+
+ALTER TABLE users ADD CONSTRAINT first_name UNIQUE(first_name);
+
+ALTER TABLE users 
+		ADD COLUMN created_at timestamp;
+
+--ORDER BY
+
+SELECT first_name FROM users ORDER BY birthday DESC NULLS LAST;
