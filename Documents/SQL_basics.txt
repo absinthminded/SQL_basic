@@ -94,4 +94,16 @@ SELECT EXTRACT(year FROM birthday) AS year_of_birthday, COUNT(*) FROM users
 		WHERE birthday IS NOT NULL
 		GROUP BY year_of_birthday
 		ORDER BY year_of_birthday ASC;
+		
+		
+SELECT first_name, topics.id
+  FROM users JOIN topics ON topics.user_id=users.id 
+  WHERE users.email LIKE '%@lannister.com'
+  ORDER BY topics.created_at ASC;
 
+--Transactions
+
+BEGIN;
+INSERT INTO friendship (user1_id, user2_id) VALUES (7, 2);
+INSERT INTO friendship (user1_id, user2_id) VALUES (2, 7);
+COMMIT;
