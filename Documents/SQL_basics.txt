@@ -66,3 +66,32 @@ ALTER TABLE users
 --ORDER BY
 
 SELECT first_name FROM users ORDER BY birthday DESC NULLS LAST;
+
+--select with different parameters
+
+SELECT * FROM users 
+		WHERE house='stark' OR
+		created_at BETWEEN  '2018-11-23' AND '2018-12-12'
+		ORDER BY created_at DESC;
+		
+-- LIMITs & OFFSETs
+
+SELECT * FROM users
+		WHERE birthday<'2002-10-3'
+		ORDER BY first_name ASC
+		LIMIT 3 OFFSET 2;
+		
+-- DISTINCT/DISTINCT ON
+
+SELECT DISTINCT house FROM users
+			ORDER BY house;
+			
+--Functions
+
+SELECT COUNT( house ) FROM users WHERE house='stark';
+
+SELECT EXTRACT(year FROM birthday) AS year_of_birthday, COUNT(*) FROM users
+		WHERE birthday IS NOT NULL
+		GROUP BY year_of_birthday
+		ORDER BY year_of_birthday ASC;
+
